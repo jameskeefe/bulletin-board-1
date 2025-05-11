@@ -20,7 +20,7 @@
 
     <dl>
       <dt>
-        Name
+        Title
       </dt>
       <dd>
         <%= @the_board.name %>
@@ -49,23 +49,78 @@
 <div>
   <div>
     <h2>
-      Edit board
+      Add post
     </h2>
 
-    <form action="/modify_board/<%= @the_board.id %>"  method="post" >
+    <form action="/insert_post"  method="post" >
       <div>
-        <label for="name_box">
-          Name
-        </label>
-
-        <input type="text" id="name_box" name="query_name" value="<%= @the_board.name %>">
+        <input type="hidden" name="query_board_id" value="<%= @the_board.id %>" >
+      </div>
+      <div>
+        <label for="title_box">Title</label>
+        <input type="text" id="title_box" name="query_title">
+      </div>
+            <div>
+        <label for="body_box">Body</label>
+        <input type="text" id="body_box" name="query_body">
+      </div>
+      <div>
+        <label for="expires_box">Expires on</label>
+        <input type="date" id="expires_box" name="query_expires_on">
       </div>
 
       <button>
-        Update board
+        Add post
       </button>
     </form>
   </div>
 </div>
 
 <hr>
+
+<h2>Posts</h2>
+
+<table border="1">
+  <tr>
+    <th>
+      Title
+    </th>
+
+    <th>
+      Body
+    </th>
+
+    <th>
+      Expires on
+    </th>
+
+    <th>
+      Created on
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% posts = @the_board.posts %>
+
+  <% posts.each do |post| %>
+    <tr>
+      <td>
+        <%= post.title %>
+      </td>
+
+      <td>
+        <%= post.body %>
+      </td>
+
+      <td>
+        <%= post.expires_on %>
+      </td>
+
+      <td>
+        <%= post.created_at %>
+      </td>
+    </tr>
+  <% end %>
+</table>

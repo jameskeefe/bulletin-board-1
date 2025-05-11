@@ -10,9 +10,7 @@ class BoardsController < ApplicationController
   def show
     the_id = params.fetch("path_id")
 
-    matching_boards = Board.where({ :id => the_id })
-
-    @the_board = matching_boards.at(0)
+    @the_board = Board.where({ :id => the_id }).at(0)
 
     render({ :template => "boards/show" })
   end
